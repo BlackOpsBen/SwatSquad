@@ -30,20 +30,8 @@ void ASoldierCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 	
-	PlayerInputComponent->BindAxis(TEXT("Run"), this, &ASoldierCharacter::Run);
+	//PlayerInputComponent->BindAxis(TEXT("Run"), this, &ASoldierCharacter::Run);
 
-	PlayerInputComponent->BindAxis(TEXT("Strafe"), this, &ASoldierCharacter::Strafe);
-}
-
-void ASoldierCharacter::Run(float direction)
-{
-	AddMovementInput(FVector::ForwardVector, direction);
-	UE_LOG(LogTemp, Warning, TEXT("Run direction: %f"), direction);
-}
-
-void ASoldierCharacter::Strafe(float direction)
-{
-	AddMovementInput(FVector::RightVector, direction);
-	UE_LOG(LogTemp, Warning, TEXT("Strafe direction: %f"), direction);
+	//PlayerInputComponent->BindAxis(TEXT("Strafe"), this, &ASoldierCharacter::Strafe);
 }
 
