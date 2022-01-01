@@ -26,18 +26,20 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-private:
-	UPROPERTY(VisibleAnywhere)
-	TArray<AActor*> soldiers;
+	TArray<AActor*> GetSoldiers();
 
+	FVector GetInputMoveVector() const;
+
+private:
 	FVector inputMoveVector{};
 	void InputMoveForward(float direction);
 	void InputMoveRight(float direction);
 
-	FVector relativeForward{};
-	FVector relativeRight{};
+	UPROPERTY(VisibleAnywhere)
+	TArray<AActor*> soldiers;
 
-	void FlattenAndNormalizeRelatives();
-	void MoveSoldiers();
+	UPROPERTY(VisibleAnywhere)
+	class USquadMovement* squadMovementComponent;
+
 	void CenterOnAllSoldiers();
 };

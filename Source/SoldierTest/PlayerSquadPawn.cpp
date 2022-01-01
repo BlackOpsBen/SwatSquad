@@ -4,13 +4,14 @@
 #include "PlayerSquadPawn.h"
 #include "SoldierCharacter.h"
 #include "Kismet/GameplayStatics.h"
+#include "SquadMovement.h"
 
 // Sets default values
 APlayerSquadPawn::APlayerSquadPawn()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	squadMovementComponent = CreateDefaultSubobject<USquadMovement>(TEXT("Squad Movement Component"));
 }
 
 // Called when the game starts or when spawned
@@ -26,8 +27,6 @@ void APlayerSquadPawn::BeginPlay()
 void APlayerSquadPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	FlattenAndNormalizeRelatives();
-	MoveSoldiers();
 	CenterOnAllSoldiers();
 }
 
@@ -51,24 +50,14 @@ void APlayerSquadPawn::InputMoveRight(float direction)
 	inputMoveVector.Y = direction;
 }
 
-void APlayerSquadPawn::FlattenAndNormalizeRelatives()
+FVector APlayerSquadPawn::GetInputMoveVector() const
 {
-	relativeForward = GetActorForwardVector();
-	relativeForward.Z = 0.0f;
-	relativeForward.Normalize();
-	relativeRight = GetActorRightVector();
-	relativeRight.Z = 0.0f;
-	relativeRight.Normalize();
-
+	return inputMoveVector;
 }
 
-void APlayerSquadPawn::MoveSoldiers()
+TArray<AActor*> APlayerSquadPawn::GetSoldiers()
 {
-	FVector relativeMoveVector = relativeForward * inputMoveVector.X + relativeRight * inputMoveVector.Y;
-	for (AActor* soldier : soldiers)
-	{
-		Cast<ASoldierCharacter>(soldier)->AddMovementInput(relativeMoveVector);
-	}
+	return soldiers;
 }
 
 void APlayerSquadPawn::CenterOnAllSoldiers()
