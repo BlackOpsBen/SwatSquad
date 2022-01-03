@@ -30,5 +30,5 @@ private:
 	FVector relativeRight{};
 
 	void FlattenAndNormalizeRelatives();
-	void MoveSoldiers();
+	//void MoveSoldiers();
 };

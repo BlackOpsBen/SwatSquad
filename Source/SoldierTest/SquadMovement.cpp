@@ -30,7 +30,7 @@ void USquadMovement::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	FlattenAndNormalizeRelatives();
-	MoveSoldiers();
+	//MoveSoldiers();
 }
 
 void USquadMovement::FlattenAndNormalizeRelatives()
@@ -44,13 +44,13 @@ void USquadMovement::FlattenAndNormalizeRelatives()
 
 }
 
-void USquadMovement::MoveSoldiers()
-{
-	FVector relativeMoveVector = relativeForward * GetOwner<APlayerSquadPawn>()->GetInputMoveVector().X + relativeRight * GetOwner<APlayerSquadPawn>()->GetInputMoveVector().Y;
-
-	for (AActor* soldier : GetOwner<APlayerSquadPawn>()->GetSoldiers())
-	{
-		Cast<ASoldierCharacter>(soldier)->AddMovementInput(relativeMoveVector);
-	}
-}
+//void USquadMovement::MoveSoldiers()
+//{
+//	FVector relativeMoveVector = relativeForward * GetOwner<APlayerSquadPawn>()->GetInputMoveVector().X + relativeRight * GetOwner<APlayerSquadPawn>()->GetInputMoveVector().Y;
+//
+//	for (AActor* soldier : GetOwner<APlayerSquadPawn>()->GetSoldiers())
+//	{
+//		Cast<ASoldierCharacter>(soldier)->AddMovementInput(relativeMoveVector);
+//	}
+//}
 
